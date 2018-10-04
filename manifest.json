@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "name": "ConfluenceUMLRenderer",
+  "short_name": "Enabling PlantUML script to render as .svg vector graphics inline on Confluence",
+  "description": "This extension substitutes Plant UML script with UML diagrams in .svg-format.",
+  "version": "0.54",
+  "icons": {
+    "16": "umlicon_16.png",
+    "48": "umlicon_48.png",
+    "128": "umlicon_128.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "https://confluence1.srv.volvo.com:9443/*",
+    "http://www.plantuml.com/*",
+    "unlimitedStorage"
+  ],
+
+  "browser_action": {
+    "default_icon": {
+      "16": "umlicon_16.png"
+    }
+  },
+
+  "options_page": "UMLOptions.html",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://confluence1.srv.volvo.com:9443/*",
+        "http://www.plantuml.com/*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "synchro.js",
+        "umlrendering.js",
+        "UMLOptions.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+
+@startuml
+
+== Current flow for WTP with Non-supported SWAP services ==
+
+TCE-> WTP@BOS: TR.Invoke()
+WTP@BOS->WTP@OBS: InvokePDU(RequireUserAck)
+WTP@OBS->TGW: Non-supported SWAP Service Request
+TGW->TCE: SWAP(Error-11)
+
+== Suggested alternative flow for WTP with Non-supporte SWAP services ==
+
+TCE-> WTP@BOS: TR.Invoke()
+WTP@BOS->WTP@OBS: InvokePDU(RequireUserAck)
+WTP@OBS->TGW: Non-supported SWAP Service Request
+TGW->WTP@OBS: TR.Abort(User Defined Reason code) Non-supported SWAP Service Request
+WTP@OBS->WTP@BOS: TR.Abort(Reason)
+WTP@BOS->TCE: TR.Abort(Reason)
+
+
+@enduml
